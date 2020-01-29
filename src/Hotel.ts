@@ -4,6 +4,6 @@ export class Hotel {
   constructor(_rooms: number) {}
 
   public checkInGuest(guest: { name: string }){
-    console.log("check in guest here!")
+    this.guests.push(guest);
   }
 }
