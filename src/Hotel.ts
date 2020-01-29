@@ -1,9 +1,17 @@
 export class Hotel {
-  public guests: any[] = [];
+  public storedGuests: any[] = [];
 
   constructor(_rooms: number) {}
 
   public checkInGuest(guest: { name: string }){
-    this.guests.push(guest);
+    const hotelGuest = this.storedGuests.some(storedGuest => {
+      return storedGuest.name===guest.name} );
+
+   if (hotelGuest) {
+      console.log("You're already checked in!");
+    }
+    else {
+      this.storedGuests.push(guest);
+      }
   }
 }

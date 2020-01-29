@@ -10,7 +10,7 @@ describe("Hotel", () => {
   });
 
   it ('should be created with no guests', () => {
-    expect(hotel.guests).to.eql([])
+    expect(hotel.storedGuests).to.eql([])
   });
 
   it ('should check in guests', () => {
@@ -18,6 +18,15 @@ describe("Hotel", () => {
     const guestTwo = Random.string();
     hotel.checkInGuest({name: guestOne});
     hotel.checkInGuest({name: guestTwo});
-    expect(hotel.guests).to.eql([{name: guestOne}, {name: guestTwo}]);
+    expect(hotel.storedGuests).to.eql([{name: guestOne}, {name: guestTwo}]);
     });
+
+  it ('should show an error when same guest checks in twice', () => {
+    const guestOne = Random.string();
+    hotel.checkInGuest({name: guestOne});
+    hotel.checkInGuest({name: guestOne});
+    expect(hotel.storedGuests).to.eql([{name: guestOne}]);
+  })
 });
+
+
