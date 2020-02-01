@@ -1,21 +1,23 @@
 export class Hotel {
   public storedGuests: any[] = [];
   public _rooms: number;
+  public _availableRooms: number;
 
   constructor(rooms: number) {
     this._rooms = rooms;
+    this._availableRooms = rooms;
   }
 
-  get rooms() {
-    return this._rooms;
+  get availableRooms() {
+    return this._availableRooms;
   }
 
-  set rooms(num) {
-    if (this._rooms > 0) {
-      this._rooms --
+  set availableRooms(num) {
+    if (this.availableRooms > 0 && this.availableRooms <= this._rooms) {
+      this._availableRooms --;
     }
     else {
-      console.log(`Piss off!`);
+      console.log(`No room left!`);
     }
   }
 
@@ -28,11 +30,11 @@ export class Hotel {
     if (hotelGuest === true) {
       console.log(`You're already checked in!`);
     }
-    else if (this.rooms === 0) {
-      console.log(`Fuck off!`);
+    else if (this.availableRooms === 0) {
+      console.log(`Piss off!`);
     }
     else {
-      this.rooms --;
+      this.availableRooms --;
       this.storedGuests.push(guest);
     }
   }

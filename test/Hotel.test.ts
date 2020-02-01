@@ -36,6 +36,15 @@ describe("Hotel", () => {
     smallHotel.checkInGuest({name: guestOne});
     expect(smallHotel.storedGuests).to.eql([])
   })
+
+  it ('will reduce available room count by 1 when a guest successfully checks in', () => {
+    const guestOne = Random.string();
+    hotel.checkInGuest({name: guestOne});
+    console.log(hotel.availableRooms);
+    expect(hotel.availableRooms).to.eql(99);
+  })
 });
+
+
 
 
