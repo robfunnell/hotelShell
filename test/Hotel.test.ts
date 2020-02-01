@@ -7,6 +7,7 @@ describe("Hotel", () => {
 
   beforeEach(() => {
     hotel = new Hotel(100);
+    console.log(hotel._rooms);
   });
 
   it ('should be created with no guests', () => {
@@ -26,6 +27,14 @@ describe("Hotel", () => {
     hotel.checkInGuest({name: guestOne});
     hotel.checkInGuest({name: guestOne});
     expect(hotel.storedGuests).to.eql([{name: guestOne}]);
+  });
+
+  it ('should not check in guests if there are not enough free rooms', () => {
+    let smallHotel;
+    smallHotel = new Hotel(0);
+    const guestOne = Random.string();
+    smallHotel.checkInGuest({name: guestOne});
+    expect(smallHotel.storedGuests).to.eql([])
   })
 });
 
