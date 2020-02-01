@@ -21,7 +21,6 @@ export class Hotel {
     }
   }
 
-
   public checkInGuest(guest: { name: string }) {
     const hotelGuest = this.storedGuests.some(storedGuest => {
       return storedGuest.name === guest.name
@@ -38,4 +37,12 @@ export class Hotel {
       this.storedGuests.push(guest);
     }
   }
+
+  public checkOutGuest(guestName: string) {
+    this.storedGuests = this.storedGuests.filter(guest => {
+      return guest.name != guestName
+    });
+  }
+
+
 }
