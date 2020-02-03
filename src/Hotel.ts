@@ -2,10 +2,12 @@ export class Hotel {
   public storedGuests: any[] = [];
   public _rooms: number;
   public _availableRooms: number;
+  public _hotelName: string;
 
-  constructor(rooms: number) {
+  constructor(hotelName: string, rooms: number) {
     this._rooms = rooms;
     this._availableRooms = rooms;
+    this._hotelName = hotelName
   }
 
   get availableRooms() {
@@ -24,7 +26,8 @@ export class Hotel {
   public newGuest (name: string, diet: string) {
     return {
     name,
-    diet,
+      diet,
+      hotel: this._hotelName,
     }
   }
 
