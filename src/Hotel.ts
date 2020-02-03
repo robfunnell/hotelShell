@@ -21,12 +21,13 @@ export class Hotel {
     }
   }
 
-  public checkInGuest(guest: { name: string }) {
-    const hotelGuest = this.storedGuests.some(storedGuest => {
-      return storedGuest.name === guest.name
+  public checkInGuest(name, diet) {
+    const guestToCheckIn = newGuest(name, diet);
+    const checkExistingGuests = this.storedGuests.some(storedGuest => {
+      return storedGuest.name === guestToCheckIn.name
     });
 
-    if (hotelGuest === true) {
+    if (checkExistingGuests === true) {
       console.log(`You're already checked in!`);
     }
     else if (this.availableRooms === 0) {
@@ -34,7 +35,7 @@ export class Hotel {
     }
     else {
       this.availableRooms --;
-      this.storedGuests.push(guest);
+      this.storedGuests.push(guestToCheckIn);
     }
   }
 
@@ -43,6 +44,11 @@ export class Hotel {
       return guest.name != guestName
     });
   }
-
-
 }
+
+const newGuest = (name: string, diet: string) => {
+  return {
+    name,
+    diet
+  }
+};

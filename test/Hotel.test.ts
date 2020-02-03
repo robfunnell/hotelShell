@@ -15,18 +15,15 @@ describe("Hotel", () => {
   });
 
   it ('should check in guests', () => {
-    const guestOne = Random.string();
-    const guestTwo = Random.string();
-    hotel.checkInGuest({name: guestOne});
-    hotel.checkInGuest({name: guestTwo});
-    expect(hotel.storedGuests).to.eql([{name: guestOne}, {name: guestTwo}]);
+    hotel.checkInGuest("John", "Seafood");
+    hotel.checkInGuest("Derek", "Pineapple");
+    expect(hotel.storedGuests).to.eql([{name: "John", diet: "Seafood"}, {name: "Derek", diet: "Pineapple"}]);
     });
 
   it ('should show an error when same guest checks in twice', () => {
-    const guestOne = Random.string();
-    hotel.checkInGuest({name: guestOne});
-    hotel.checkInGuest({name: guestOne});
-    expect(hotel.storedGuests).to.eql([{name: guestOne}]);
+    hotel.checkInGuest("John", "Purple");
+    hotel.checkInGuest("John",  "Purple");
+    expect(hotel.storedGuests).to.eql([{name: "John", diet: "Purple"}]);
   });
 
   it ('should not check in guests if there are not enough free rooms', () => {
@@ -45,10 +42,9 @@ describe("Hotel", () => {
   });
 
   it ('will checkout a guest', () => {
-    const guestOne = Random.string();
-    hotel.checkInGuest({name: guestOne});
+    hotel.checkInGuest("John",  "Purple");
     console.log(hotel.storedGuests);
-    hotel.checkOutGuest(guestOne);
+    hotel.checkOutGuest("John");
     console.log(hotel.storedGuests);
     expect(hotel.storedGuests).to.eql([]);
   })
