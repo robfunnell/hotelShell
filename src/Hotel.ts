@@ -21,8 +21,15 @@ export class Hotel {
     }
   }
 
+  public newGuest (name: string, diet: string) {
+    return {
+    name,
+    diet,
+    }
+  }
+
   public checkInGuest(name, diet) {
-    const guestToCheckIn = newGuest(name, diet);
+    const guestToCheckIn = this.newGuest(name, diet);
     const checkExistingGuests = this.storedGuests.some(storedGuest => {
       return storedGuest.name === guestToCheckIn.name
     });
@@ -45,10 +52,3 @@ export class Hotel {
     });
   }
 }
-
-const newGuest = (name: string, diet: string) => {
-  return {
-    name,
-    diet
-  }
-};
