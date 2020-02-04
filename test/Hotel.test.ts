@@ -7,7 +7,15 @@ describe("Hotel", () => {
 
   beforeEach(() => {
     hotel = new Hotel("testHotel", 100);
+    hotel.createRooms();
     console.log(hotel._rooms);
+  });
+
+  it ('should create an array with the rooms', () => {
+    let smallHotel;
+    smallHotel = new Hotel("testHotel", 2);
+    smallHotel.createRooms();
+    expect(smallHotel.storedRooms).to.eql([{roomNumber: 1, inService: true}, {roomNumber: 2, inService: true}])
   });
 
   it ('should be created with no guests', () => {

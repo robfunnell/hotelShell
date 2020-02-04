@@ -1,6 +1,7 @@
 export class Hotel {
   public storedGuests: any[] = [];
   public _rooms: number;
+  public storedRooms: any[] = [];
   public _availableRooms: number;
   public _hotelName: string;
 
@@ -8,6 +9,12 @@ export class Hotel {
     this._rooms = rooms;
     this._availableRooms = rooms;
     this._hotelName = hotelName
+  }
+
+ createRooms() {
+    for (let i = 1; i <= this._rooms; i++) {
+      this.storedRooms.push({roomNumber: i, inService: true})
+    }
   }
 
   get availableRooms() {
