@@ -2,9 +2,9 @@ import { expect } from "chai";
 import {Guest} from "../src/Guest";
 
 describe('Guest', () => {
-    const guest1 = new Guest('jeremy', 'pescetarian');
-    const guest2 = new Guest('edgar', 'vegan');
-    const guest3 = new Guest('albert', 'none');
+    const guest1 = new Guest('jeremy', ['pescetarian']);
+    const guest2 = new Guest('edgar', ['vegan']);
+    const guest3 = new Guest('albert', ['none', 'no']);
 
     it('should return true if they can eat fish', () => {
       expect(guest1.canEatFish()).to.eql(true);
