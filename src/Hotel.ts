@@ -1,18 +1,16 @@
+import {Guest} from "../src/Guest";
+
 export class Hotel {
   public storedGuests: any[] = [];
-  public _rooms: number;
   public storedRooms: any[] = [];
   public _availableRooms: number;
-  public _hotelName: string;
 
-  constructor(hotelName: string, rooms: number) {
-    this._rooms = rooms;
+  constructor(private hotelName: string, private rooms: number) {
     this._availableRooms = rooms;
-    this._hotelName = hotelName
   }
 
  createRooms() {
-    for (let i = 1; i <= this._rooms; i++) {
+    for (let i = 1; i <= this.rooms; i++) {
       this.storedRooms.push({roomNumber: i, inService: true})
     }
   }
@@ -22,7 +20,7 @@ export class Hotel {
   }
 
   set availableRooms(num) {
-    if (this.availableRooms > 0 && this.availableRooms <= this._rooms) {
+    if (this.availableRooms > 0 && this.availableRooms <= this.rooms) {
       this._availableRooms --;
     }
     else {
@@ -34,7 +32,7 @@ export class Hotel {
     return {
     name,
       diet,
-      hotel: this._hotelName,
+      hotel: this.hotelName,
     }
   }
 

@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Random} from "../utils/Random";
 import {Hotel} from "../src/Hotel";
+import {Guest} from "../src/Guest";
 
 describe("Hotel", () => {
   let hotel;
