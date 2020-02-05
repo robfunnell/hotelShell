@@ -14,4 +14,13 @@ describe('Guest', () => {
   it('should return false if they cannot eat fish', () => {
       expect(guest2.canEatFish()).to.eql(false);
   });
+
+    it('should return true if they can eat meat', () => {
+        expect(guest1.canEatMeat()).to.eql(true);
+        expect(guest3.canEatMeat()).to.eql(true);
+    });
+
+    it('should return false if they cannot eat meat', () => {
+        expect(guest2.canEatMeat()).to.eql(false);
+    });
 });

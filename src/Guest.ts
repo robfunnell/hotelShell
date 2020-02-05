@@ -8,4 +8,9 @@ export class Guest {
         const cannotEatFish = ['fish allergy', 'vegetarian', 'vegan'];
         return !(this.dietaryRequirements.some(r => cannotEatFish.includes(r)));
     }
+
+    canEatMeat() : boolean {
+        const cannotEatMeat = ['meat allergy', 'vegetarian', 'vegan'];
+        return !(this.dietaryRequirements.some(r => cannotEatMeat.includes(r)));
+    }
 }
