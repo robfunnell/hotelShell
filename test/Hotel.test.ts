@@ -1,13 +1,7 @@
 import {expect} from 'chai';
 import {Random} from "../utils/Random";
 import {Hotel} from "../src/Hotel";
-import {Guest} from "../src/Guest";
-
-export class Room {
-  public isRoomAvailable: boolean = true;
-  constructor(roomID: number) {
-  }
-}
+import {Room} from "../src/Room";
 
 describe("Hotel", () => {
   let hotel;
@@ -15,19 +9,16 @@ describe("Hotel", () => {
   const room = new Room(1);
 
   beforeEach(() => {
-    hotel = new Hotel("testHotel", [room]);
+    hotel = new Hotel("testHotel", 2);
   });
 
-  // it ('should create an array with the rooms', () => {
-  //   //   let smallHotel;
-  //   //   smallHotel = new Hotel("testHotel", 2);
-  //   //   smallHotel.createRooms();
-  //   //   expect(smallHotel.storedRooms).to.eql([{roomNumber: 1, inService: true}, {roomNumber: 2, inService: true}])
-  //   // });
 
-  it ('should create an array with the rooms', () => {
-    expect(hotel.findAvailableRooms()).to.eql([room])
+
+  it ('should create an array with two rooms', () => {
+    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1}, {isRoomAvailable: true, roomID: 2}])
   });
+
+
 //
 //   it ('should be created with no guests', () => {
 //     expect(hotel.storedGuests).to.eql([])

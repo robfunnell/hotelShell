@@ -1,34 +1,24 @@
-import {Guest} from "../src/Guest";
-import {Room} from "../test/Hotel.test";
+import {Room} from "./Room";
+
 
 export class Hotel {
   public storedGuests: any[] = [];
-  public storedRooms: any[] = [];
+  public storedRooms: Room[] = [];
   public _availableRooms: number;
 
-  constructor(private hotelName: string, private rooms: Room[]) {
+  constructor(private hotelName: string, private roomNumber: number) {
+    for(let i=1; i<=roomNumber; i++) {
+      this.storedRooms.push(new Room(i))
+    }
   }
 
     public findAvailableRooms() {
-        return this.rooms
+        return this.storedRooms
     }
 
  // createRooms() {
  //    for (let i = 1; i <= this.rooms; i++) {
  //      this.storedRooms.push({roomNumber: i, inService: true})
- //    }
- //  }
- //
- //  get availableRooms() {
- //    return this._availableRooms;
- //  }
- //
- //  set availableRooms(num) {
- //    if (this.availableRooms > 0 && this.availableRooms <= this.rooms) {
- //      this._availableRooms --;
- //    }
- //    else {
- //      console.log(`No room left!`);
  //    }
  //  }
  //
