@@ -3,60 +3,70 @@ import {Random} from "../utils/Random";
 import {Hotel} from "../src/Hotel";
 import {Guest} from "../src/Guest";
 
+export class Room {
+  public isRoomAvailable: boolean = true;
+  constructor(roomID: number) {
+  }
+}
+
 describe("Hotel", () => {
   let hotel;
 
+  const room = new Room(1);
+
   beforeEach(() => {
-    hotel = new Hotel("testHotel", 100);
-    hotel.createRooms();
-    console.log(hotel._rooms);
+    hotel = new Hotel("testHotel", [room]);
   });
+
+  // it ('should create an array with the rooms', () => {
+  //   //   let smallHotel;
+  //   //   smallHotel = new Hotel("testHotel", 2);
+  //   //   smallHotel.createRooms();
+  //   //   expect(smallHotel.storedRooms).to.eql([{roomNumber: 1, inService: true}, {roomNumber: 2, inService: true}])
+  //   // });
 
   it ('should create an array with the rooms', () => {
-    let smallHotel;
-    smallHotel = new Hotel("testHotel", 2);
-    smallHotel.createRooms();
-    expect(smallHotel.storedRooms).to.eql([{roomNumber: 1, inService: true}, {roomNumber: 2, inService: true}])
+    expect(hotel.findAvailableRooms()).to.eql([room])
   });
-
-  it ('should be created with no guests', () => {
-    expect(hotel.storedGuests).to.eql([])
-  });
-
-  it ('should check in guests', () => {
-    hotel.checkInGuest("John", "Seafood");
-    hotel.checkInGuest("Derek", "Pineapple");
-    expect(hotel.storedGuests).to.eql([{name: "John", diet: "Seafood", hotel: "testHotel"}, {name: "Derek", diet: "Pineapple", hotel: "testHotel"}]);
-    });
-
-  it ('should show an error when same guest checks in twice', () => {
-    hotel.checkInGuest("John", "Purple");
-    hotel.checkInGuest("John",  "Purple");
-    expect(hotel.storedGuests).to.eql([{name: "John", diet: "Purple", hotel: "testHotel"}]);
-  });
-
-  it ('should not check in guests if there are not enough free rooms', () => {
-    let smallHotel;
-    smallHotel = new Hotel("testHotel", 0);
-    const guestOne = Random.string();
-    smallHotel.checkInGuest("Kenny", "Death");
-    expect(smallHotel.storedGuests).to.eql([])
-  });
-
-  it ('will reduce available room count by 1 when a guest successfully checks in', () => {
-    const guestOne = Random.string();
-    hotel.checkInGuest("Billy", "Can't eat");
-    console.log(hotel.availableRooms);
-    expect(hotel.availableRooms).to.eql(99);
-  });
-
-  it ('will checkout a guest', () => {
-    hotel.checkInGuest("John",  "Purple");
-    console.log(hotel.storedGuests);
-    hotel.checkOutGuest("John");
-    console.log(hotel.storedGuests);
-    expect(hotel.storedGuests).to.eql([]);
-  })
+//
+//   it ('should be created with no guests', () => {
+//     expect(hotel.storedGuests).to.eql([])
+//   });
+//
+//   it ('should check in guests', () => {
+//     hotel.checkInGuest("John", "Seafood");
+//     hotel.checkInGuest("Derek", "Pineapple");
+//     expect(hotel.storedGuests).to.eql([{name: "John", diet: "Seafood", hotel: "testHotel"}, {name: "Derek", diet: "Pineapple", hotel: "testHotel"}]);
+//     });
+//
+//   it ('should show an error when same guest checks in twice', () => {
+//     hotel.checkInGuest("John", "Purple");
+//     hotel.checkInGuest("John",  "Purple");
+//     expect(hotel.storedGuests).to.eql([{name: "John", diet: "Purple", hotel: "testHotel"}]);
+//   });
+//
+//   it ('should not check in guests if there are not enough free rooms', () => {
+//     let smallHotel;
+//     smallHotel = new Hotel("testHotel", 0);
+//     const guestOne = Random.string();
+//     smallHotel.checkInGuest("Kenny", "Death");
+//     expect(smallHotel.storedGuests).to.eql([])
+//   });
+//
+//   it ('will reduce available room count by 1 when a guest successfully checks in', () => {
+//     const guestOne = Random.string();
+//     hotel.checkInGuest("Billy", "Can't eat");
+//     console.log(hotel.availableRooms);
+//     expect(hotel.availableRooms).to.eql(99);
+//   });
+//
+//   it ('will checkout a guest', () => {
+//     hotel.checkInGuest("John",  "Purple");
+//     console.log(hotel.storedGuests);
+//     hotel.checkOutGuest("John");
+//     console.log(hotel.storedGuests);
+//     expect(hotel.storedGuests).to.eql([]);
+//   })
 });
 
 
