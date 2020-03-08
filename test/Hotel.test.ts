@@ -50,8 +50,10 @@ describe("Hotel", () => {
     for (let i = 0; i < hugeHotel.roomNumber; i++) {
       hugeHotel.checkIn(Random.string())
     }
-    console.log(hugeHotel.storedRooms);
-    expect(hugeHotel.roomCheck()).to.eql(false);
+    for (let i = hugeHotel.roomNumber; i > 0; i--) {
+      hugeHotel.checkOut(i)
+    }
+    expect(hugeHotel.findAvailableRooms().length).to.eql(hugeHotel.roomNumber);
   });
 
 
