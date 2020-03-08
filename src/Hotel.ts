@@ -1,4 +1,5 @@
 import {Room} from "./Room";
+import {Guest} from "./Guest"
 
 
 export class Hotel {
@@ -35,7 +36,7 @@ export class Hotel {
     }
     for (let i in this.storedRooms) {
       if (this.storedRooms[i].roomID === freeRoomID) {
-        this.storedRooms[i].guestName = name;
+        this.storedRooms[i].guestInfo = new Guest(name);
         this.storedRooms[i].isRoomAvailable = false;
       }
     }
@@ -45,7 +46,7 @@ export class Hotel {
     for (let i in this.storedRooms) {
       if (this.storedRooms[i].roomID === roomNumber) {
         this.storedRooms[i].isRoomAvailable = true;
-        this.storedRooms[i].guestName = ""
+        this.storedRooms[i].guestInfo = null;
       }
     }
   }

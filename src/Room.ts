@@ -1,6 +1,6 @@
 export class Room {
     public isRoomAvailable: boolean = true;
-    public guestName: string = "";
+    public guestInfo: object;
     public roomID: number;
     constructor(roomID: number) {
         this.roomID = roomID;
