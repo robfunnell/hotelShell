@@ -17,38 +17,38 @@ describe("Hotel", () => {
   });
 
   it ('should check in a guest', () => {
-    hotel.checkIn("Kenny");
-    expect(hotel.storedRooms[0]).to.eql({isRoomAvailable: false, roomID: 1, guestInfo: {guestName: "Kenny", guestBill: 0}})
+    hotel.checkIn("Kenny", 7);
+    expect(hotel.storedRooms[0]).to.eql({isRoomAvailable: false, roomID: 1, guestInfo: {guestName: "Kenny", stayDuration: 7, guestBill: 700}})
   });
 
   it ('should not return occupied room', () => {
-    hotel.checkIn("Kenny");
+    hotel.checkIn("Kenny", 7);
     expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 2}])
   });
 
   it ('should fail to return any rooms', () => {
-    hotel.checkIn("Kenny");
-    hotel.checkIn("Stan");
+    hotel.checkIn("Kenny", 7);
+    hotel.checkIn("Stan", 7);
     expect(hotel.roomCheck()).to.eql(false);
   });
 
   it ('should check out guest', () => {
-    hotel.checkIn("Kenny");
-    hotel.checkIn("Stan");
+    hotel.checkIn("Kenny", 7);
+    hotel.checkIn("Stan", 7);
     hotel.checkOut(1);
     expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1}])
   });
 
   it ('should alert that there are no available rooms left', () => {
-    hotel.checkIn("Kenny");
-    hotel.checkIn("Stan");
-    expect(hotel.checkIn("Donald")).to.eql(console.log("Error: no available rooms."));
+    hotel.checkIn("Kenny", 7);
+    hotel.checkIn("Stan", 7);
+    expect(hotel.checkIn("Donald", 7)).to.eql(console.log("Error: no available rooms."));
   });
 
   it ('should work in a huge hotel', () => {
     let hugeHotel = new Hotel("Huge Hotel", 69);
     for (let i = 0; i < hugeHotel.roomNumber; i++) {
-      hugeHotel.checkIn(Random.string())
+      hugeHotel.checkIn(Random.string(), 1)
     }
     for (let i = hugeHotel.roomNumber; i > 0; i--) {
       hugeHotel.checkOut(i)

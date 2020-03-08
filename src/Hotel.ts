@@ -28,7 +28,7 @@ export class Hotel {
     return freeRoom.roomID;
   }
 
-  public checkIn(name: string) {
+  public checkIn(name: string, lengthOfStay: number) {
     let freeRoomID = this.findFreeRoom();
     if (!freeRoomID) {
       console.log("Error: no available rooms.");
@@ -36,7 +36,7 @@ export class Hotel {
     }
     for (let i in this.storedRooms) {
       if (this.storedRooms[i].roomID === freeRoomID) {
-        this.storedRooms[i].guestInfo = new Guest(name);
+        this.storedRooms[i].guestInfo = new Guest(name, lengthOfStay);
         this.storedRooms[i].isRoomAvailable = false;
       }
     }
@@ -45,6 +45,7 @@ export class Hotel {
   public checkOut(roomNumber: number) {
     for (let i in this.storedRooms) {
       if (this.storedRooms[i].roomID === roomNumber) {
+        console.log(this.storedRooms[i]);
         this.storedRooms[i].isRoomAvailable = true;
         delete this.storedRooms[i].guestInfo;
       }
