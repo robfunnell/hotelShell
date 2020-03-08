@@ -10,21 +10,35 @@ export class Hotel {
     }
   }
 
-    public findAvailableRooms() {
-        return this.storedRooms.filter(room => room.isRoomAvailable)
+    public findFreeRoom() {
+      let freeRoom =  this.storedRooms.find( ({isRoomAvailable}) => isRoomAvailable === true);
+      return freeRoom.roomID;
     }
 
+
+
+    public findAvailableRooms() {
+        let freeRooms = this.storedRooms.filter(room => room.isRoomAvailable);
+        if (freeRooms.length > 0) {
+          return freeRooms
+        }
+        else {
+          console.log("No room in the inn!");
+        }
+    }
+
+
+
     public checkIn(name: string) {
-    let freeRooms = this.storedRooms.filter(room => room.isRoomAvailable);
-    if (freeRooms.length > 0) {
-        let allocatedRoom = (freeRooms[0].roomID - 1);
-        this.storedRooms[allocatedRoom].guestName = name;
-        this.storedRooms[allocatedRoom].isRoomAvailable = false;
-      }
-      else {
-        console.log("No room!")
+      let freeRoomID = this.findFreeRoom();
+      for (let i in this.storedRooms) {
+        if (this.storedRooms[i].roomID === freeRoomID) {
+          this.storedRooms[i].guestName = name;
+          this.storedRooms[i].isRoomAvailable = false;
+        }
       }
     }
+
 
  // createRooms() {
  //    for (let i = 1; i <= this.rooms; i++) {
