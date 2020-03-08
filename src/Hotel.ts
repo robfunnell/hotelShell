@@ -39,6 +39,15 @@ export class Hotel {
       }
     }
 
+    public checkOut(roomNumber: number) {
+    for (let i in this.storedRooms) {
+      if (this.storedRooms[i].roomID === roomNumber) {
+        this.storedRooms[i].isRoomAvailable = true;
+        this.storedRooms[i].guestName = ""
+      }
+    }
+    }
+
 
  // createRooms() {
  //    for (let i = 1; i <= this.rooms; i++) {

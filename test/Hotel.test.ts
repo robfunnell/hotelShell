@@ -15,7 +15,7 @@ describe("Hotel", () => {
 
 
   it ('should create an array with two rooms', () => {
-    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1}, {isRoomAvailable: true, roomID: 2}])
+    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1, guestName: ""}, {isRoomAvailable: true, roomID: 2, guestName: ""}])
   });
 
   it ('should check in a guest', () => {
@@ -25,13 +25,20 @@ describe("Hotel", () => {
 
   it ('should not return occupied room', () => {
     hotel.checkIn("Kenny");
-    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 2}])
+    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 2, guestName: ""}])
   });
 
   it ('should fail to return any rooms', () => {
     hotel.checkIn("Kenny");
     hotel.checkIn("Stan");
     expect(hotel.findAvailableRooms()).to.eql(console.log("No room in the inn!"))
+  });
+
+  it ('should check out guest', () => {
+    hotel.checkIn("Kenny");
+    hotel.checkIn("Stan");
+    hotel.checkOut(1);
+    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1, guestName: ""}])
   });
 
 
