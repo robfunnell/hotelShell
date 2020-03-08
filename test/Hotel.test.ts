@@ -18,6 +18,19 @@ describe("Hotel", () => {
     expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1}, {isRoomAvailable: true, roomID: 2}])
   });
 
+  it ('should check in a guest', () => {
+    hotel.checkIn("Kenny");
+    expect(hotel.storedRooms[0]).to.eql({isRoomAvailable: false, roomID: 1, guestName: "Kenny"})
+  });
+
+  it ('should occupy both rooms', () => {
+    hotel.checkIn("Kenny");
+    hotel.checkIn("Donald");
+    expect(hotel.storedRooms[0]).to.eql({isRoomAvailable: false, roomID: 1, guestName: "Kenny"})
+  });
+
+
+
 
 //
 //   it ('should be created with no guests', () => {

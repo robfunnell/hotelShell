@@ -2,9 +2,7 @@ import {Room} from "./Room";
 
 
 export class Hotel {
-  public storedGuests: any[] = [];
   public storedRooms: Room[] = [];
-  public _availableRooms: number;
 
   constructor(private hotelName: string, private roomNumber: number) {
     for(let i=1; i<=roomNumber; i++) {
@@ -13,7 +11,19 @@ export class Hotel {
   }
 
     public findAvailableRooms() {
-        return this.storedRooms
+        return this.storedRooms.filter(room => room.isRoomAvailable)
+    }
+
+    public checkIn(name: string) {
+    let freeRooms = this.storedRooms.filter(room => room.isRoomAvailable);
+    if (freeRooms.length > 0) {
+        let allocatedRoom = (freeRooms[0].roomID - 1);
+        this.storedRooms[allocatedRoom].guestName = name;
+        this.storedRooms[allocatedRoom].isRoomAvailable = false;
+      }
+      else {
+        console.log("No room!")
+      }
     }
 
  // createRooms() {
