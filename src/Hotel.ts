@@ -46,7 +46,7 @@ export class Hotel {
     for (let i in this.storedRooms) {
       if (this.storedRooms[i].roomID === roomNumber) {
         this.storedRooms[i].isRoomAvailable = true;
-        this.storedRooms[i].guestInfo = null;
+        delete this.storedRooms[i].guestInfo;
       }
     }
   }
