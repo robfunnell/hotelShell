@@ -31,7 +31,7 @@ describe("Hotel", () => {
   it ('should fail to return any rooms', () => {
     hotel.checkIn("Kenny");
     hotel.checkIn("Stan");
-    expect(hotel.findAvailableRooms()).to.eql(console.log("No room in the inn!"))
+    expect(hotel.roomCheck()).to.eql(false);
   });
 
   it ('should check out guest', () => {
@@ -39,6 +39,12 @@ describe("Hotel", () => {
     hotel.checkIn("Stan");
     hotel.checkOut(1);
     expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1, guestName: ""}])
+  });
+
+  it ('should alert that there are no available rooms left', () => {
+    hotel.checkIn("Kenny");
+    hotel.checkIn("Stan");
+    expect(hotel.checkIn("Donald")).to.eql(console.log("Error: no available rooms."));
   });
 
 

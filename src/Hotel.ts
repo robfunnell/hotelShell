@@ -10,12 +10,45 @@ export class Hotel {
     }
   }
 
-    public findFreeRoom() {
-      let freeRoom =  this.storedRooms.find( ({isRoomAvailable}) => isRoomAvailable === true);
-      return freeRoom.roomID;
+  public findFreeRoom() {
+    if (!this.roomCheck()) {
+      return false
     }
+    let freeRoom =  this.storedRooms.find( ({isRoomAvailable}) => isRoomAvailable === true);
+    return freeRoom.roomID;
+  }
 
+  public roomCheck() {
+    for (let i in this.storedRooms) {
+      if (this.storedRooms[i].isRoomAvailable) {
+        return true
+      }
+    }
+    return false
+  }
 
+  public checkIn(name: string) {
+    let freeRoomID = this.findFreeRoom();
+    if (!freeRoomID) {
+      console.log("Error: no available rooms.");
+      return
+    }
+    for (let i in this.storedRooms) {
+      if (this.storedRooms[i].roomID === freeRoomID) {
+        this.storedRooms[i].guestName = name;
+        this.storedRooms[i].isRoomAvailable = false;
+      }
+    }
+  }
+
+  public checkOut(roomNumber: number) {
+    for (let i in this.storedRooms) {
+      if (this.storedRooms[i].roomID === roomNumber) {
+        this.storedRooms[i].isRoomAvailable = true;
+        this.storedRooms[i].guestName = ""
+      }
+    }
+  }
 
     public findAvailableRooms() {
         let freeRooms = this.storedRooms.filter(room => room.isRoomAvailable);
@@ -29,24 +62,7 @@ export class Hotel {
 
 
 
-    public checkIn(name: string) {
-      let freeRoomID = this.findFreeRoom();
-      for (let i in this.storedRooms) {
-        if (this.storedRooms[i].roomID === freeRoomID) {
-          this.storedRooms[i].guestName = name;
-          this.storedRooms[i].isRoomAvailable = false;
-        }
-      }
-    }
 
-    public checkOut(roomNumber: number) {
-    for (let i in this.storedRooms) {
-      if (this.storedRooms[i].roomID === roomNumber) {
-        this.storedRooms[i].isRoomAvailable = true;
-        this.storedRooms[i].guestName = ""
-      }
-    }
-    }
 
 
  // createRooms() {
