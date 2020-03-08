@@ -6,8 +6,6 @@ import {Room} from "../src/Room";
 describe("Hotel", () => {
   let hotel;
 
-  const room = new Room(1);
-
   beforeEach(() => {
     hotel = new Hotel("testHotel", 2);
   });
@@ -45,6 +43,15 @@ describe("Hotel", () => {
     hotel.checkIn("Kenny");
     hotel.checkIn("Stan");
     expect(hotel.checkIn("Donald")).to.eql(console.log("Error: no available rooms."));
+  });
+
+  it ('should work in a huge hotel', () => {
+    let hugeHotel = new Hotel("Huge Hotel", 69);
+    for (let i = 0; i < hugeHotel.roomNumber; i++) {
+      hugeHotel.checkIn(Random.string())
+    }
+    console.log(hugeHotel.storedRooms);
+    expect(hugeHotel.roomCheck()).to.eql(false);
   });
 
 
