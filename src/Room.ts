@@ -1,8 +1,9 @@
 export class Room {
     public isRoomAvailable: boolean = true;
     public guestInfo: object;
-    public roomID: number;
-    constructor(roomID: number) {
-        this.roomID = roomID;
+    constructor(public roomID: number) {
     }
-}
+    public roomCheck() {
+        return this.isRoomAvailable;
+        }
+    }

@@ -18,25 +18,26 @@ describe("Hotel", () => {
 
   it ('should check in a guest', () => {
     hotel.checkIn("Kenny", 7);
-    expect(hotel.storedRooms[0]).to.eql({isRoomAvailable: false, roomID: 1, guestInfo: {guestName: "Kenny", stayDuration: 7, guestBill: 700}})
+    expect(hotel.storedRooms[0].isRoomAvailable).to.eql(false);
+    expect(hotel.storedRooms[0]).to.deep.include({isRoomAvailable: false, roomID: 1, guestInfo: {guestName: "Kenny", stayDuration: 7, guestBill: 700}})
   });
 
   it ('should not return occupied room', () => {
     hotel.checkIn("Kenny", 7);
-    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 2}])
+    expect(hotel.findAvailableRooms()).to.eql([{roomID: 2, isRoomAvailable: true}])
   });
 
   it ('should fail to return any rooms', () => {
     hotel.checkIn("Kenny", 7);
     hotel.checkIn("Stan", 7);
-    expect(hotel.roomCheck()).to.eql(false);
+    expect(hotel.areThereRooms()).to.eql(false);
   });
 
   it ('should check out guest', () => {
     hotel.checkIn("Kenny", 7);
     hotel.checkIn("Stan", 7);
     hotel.checkOut(1);
-    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1}])
+    expect(hotel.areThereRooms()).to.eql(true);
   });
 
   it ('should alert that there are no available rooms left', () => {

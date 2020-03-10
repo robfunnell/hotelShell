@@ -11,9 +11,9 @@ export class Hotel {
     }
   }
 
-  public roomCheck() {
+  public areThereRooms() {
     for (let i in this.storedRooms) {
-      if (this.storedRooms[i].isRoomAvailable) {
+      if (this.storedRooms[i].roomCheck()) {
         return true
       }
     }
@@ -21,7 +21,7 @@ export class Hotel {
   }
 
   public findFreeRoom() {
-    if (!this.roomCheck()) {
+    if (!this.areThereRooms()) {
       return false
     }
     let freeRoom =  this.storedRooms.find( ({isRoomAvailable}) => isRoomAvailable === true);
@@ -53,14 +53,13 @@ export class Hotel {
   }
 
   public findAvailableRooms() {
-    let freeRooms = this.storedRooms.filter(room => room.isRoomAvailable);
-    if (freeRooms.length > 0) {
-      return freeRooms
-    }
-    else {
+    if (this.areThereRooms()) {
+      return this.storedRooms.filter(room => room.isRoomAvailable)
+    } else {
       console.log("No room in the inn!");
     }
   }
+
 
  // createRooms() {
  //    for (let i = 1; i <= this.rooms; i++) {
