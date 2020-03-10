@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Random} from "../utils/Random";
 import {Hotel} from "../src/Hotel";
-import {Room} from "../src/Room";
 
 describe("Hotel", () => {
   let hotel;
@@ -13,7 +12,10 @@ describe("Hotel", () => {
 
 
   it ('should create an array with two rooms', () => {
-    expect(hotel.findAvailableRooms()).to.eql([{isRoomAvailable: true, roomID: 1}, {isRoomAvailable: true, roomID: 2}])
+    const availableRooms = hotel.findAvailableRooms();
+    expect(availableRooms.length).to.eql(2);
+    expect(availableRooms[0]).to.include({roomID: 1, isRoomAvailable: true});
+    expect(availableRooms[1]).to.include({roomID: 2, isRoomAvailable: true});
   });
 
   it ('should check in a guest', () => {
@@ -24,7 +26,9 @@ describe("Hotel", () => {
 
   it ('should not return occupied room', () => {
     hotel.checkIn("Kenny", 7);
-    expect(hotel.findAvailableRooms()).to.eql([{roomID: 2, isRoomAvailable: true}])
+    const availableRooms = hotel.findAvailableRooms();
+    console.log(availableRooms);
+    expect(availableRooms[0]).deep.include({roomID: 2, isRoomAvailable: true})
   });
 
   it ('should fail to return any rooms', () => {
