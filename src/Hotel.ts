@@ -1,34 +1,69 @@
-import {Guest} from "../src/Guest";
-import {Room} from "../test/Hotel.test";
+import {Room} from "./Room";
+import {Guest} from "./Guest"
+
 
 export class Hotel {
-  public storedGuests: any[] = [];
-  public storedRooms: any[] = [];
-  public _availableRooms: number;
+  public storedRooms: Room[] = [];
 
-  constructor(private hotelName: string, private rooms: Room[]) {
+  constructor(private hotelName: string, public roomNumber: number) {
+    for(let i=1; i<=roomNumber; i++) {
+      this.storedRooms.push(new Room(i))
+    }
   }
 
-    public findAvailableRooms() {
-        return this.rooms
+  public areThereRooms() {
+    for (let i in this.storedRooms) {
+      if (this.storedRooms[i].roomCheck()) {
+        return true
+      }
     }
+    return false
+  }
+
+  public findFreeRoom() {
+    if (!this.areThereRooms()) {
+      return false
+    }
+    let freeRoom =  this.storedRooms.find( ({isRoomAvailable}) => isRoomAvailable === true);
+    return freeRoom.roomID;
+  }
+
+  public checkIn(name: string, lengthOfStay: number) {
+    let freeRoomID = this.findFreeRoom();
+    if (!freeRoomID) {
+      console.log("Error: no available rooms.");
+      return
+    }
+    for (let i in this.storedRooms) {
+      if (this.storedRooms[i].roomID === freeRoomID) {
+        this.storedRooms[i].guestInfo = new Guest(name, lengthOfStay);
+        this.storedRooms[i].isRoomAvailable = false;
+      }
+    }
+  }
+
+  public checkOut(roomNumber: number) {
+    for (let i in this.storedRooms) {
+      if (this.storedRooms[i].roomID === roomNumber) {
+        console.log(this.storedRooms[i]);
+        this.storedRooms[i].isRoomAvailable = true;
+        delete this.storedRooms[i].guestInfo;
+      }
+    }
+  }
+
+  public findAvailableRooms() {
+    if (this.areThereRooms()) {
+      return this.storedRooms.filter(room => room.isRoomAvailable)
+    } else {
+      console.log("No room in the inn!");
+    }
+  }
+
 
  // createRooms() {
  //    for (let i = 1; i <= this.rooms; i++) {
  //      this.storedRooms.push({roomNumber: i, inService: true})
- //    }
- //  }
- //
- //  get availableRooms() {
- //    return this._availableRooms;
- //  }
- //
- //  set availableRooms(num) {
- //    if (this.availableRooms > 0 && this.availableRooms <= this.rooms) {
- //      this._availableRooms --;
- //    }
- //    else {
- //      console.log(`No room left!`);
  //    }
  //  }
  //

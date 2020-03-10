@@ -1,26 +1,21 @@
-import { expect } from "chai";
-import {Guest} from "../src/Guest";
+import {expect} from 'chai';
+import {Random} from "../utils/Random";
+import {Hotel} from "../src/Hotel";
+import {Guest} from "../src/Guest"
+import {Room} from "../src/Room";
 
-describe('Guest', () => {
-    const guest1 = new Guest('jeremy', ['pescetarian']);
-    const guest2 = new Guest('edgar', ['vegan']);
-    const guest3 = new Guest('albert', ['none', 'no']);
 
-    it('should return true if they can eat fish', () => {
-      expect(guest1.canEatFish()).to.eql(true);
-      expect(guest3.canEatFish()).to.eql(true);
-  });
+describe("Hotel", () => {
+    let hotel;
 
-  it('should return false if they cannot eat fish', () => {
-      expect(guest2.canEatFish()).to.eql(false);
-  });
-
-    it('should return true if they can eat meat', () => {
-        expect(guest1.canEatMeat()).to.eql(true);
-        expect(guest3.canEatMeat()).to.eql(true);
+    beforeEach(() => {
+        hotel = new Hotel("testHotel", 2);
     });
 
-    it('should return false if they cannot eat meat', () => {
-        expect(guest2.canEatMeat()).to.eql(false);
+
+    it('should add guest object to room', () => {
+        hotel.checkIn("Kenny");
+        expect(hotel.storedRooms[0]).to.eql({isRoomAvailable: false, roomID: 1, guestInfo: {guestName: "Kenny", guestBill: 0}});
     });
+
 });
